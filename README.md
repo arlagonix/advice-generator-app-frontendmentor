@@ -1,11 +1,5 @@
 # Advice Generator App
 
-<h3 align="center">
-  <strong>
-    <a href="https://arlagonix.github.io/projects/advice-generator-app-main/public">Open Demo in Github Pages</a>
-  </strong>
-</h3>
-
 <p align="center">
   <img src="./docs/assets/results/big.png" width="100%">
 </p>
