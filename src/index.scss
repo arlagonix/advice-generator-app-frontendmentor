@@ -1,0 +1,294 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap");
+
+// CONSTS
+
+$size: 540px;
+
+:root {
+  --primary-1: hsl(193, 38%, 86%); // quote color
+  --primary-2: hsl(150, 100%, 66%); // button bg, advice text
+  --primary-3: red; // error text
+
+  --neutral-1: hsl(217, 19%, 38%); // ???
+  --neutral-2: hsl(217, 19%, 24%); // card background
+  --neutral-3: hsl(218, 23%, 16%); // page background
+
+  --font: "Manrope", sans-serif;
+}
+
+// GLOBAL
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+// PAGE
+
+.page {
+  background: var(--neutral-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 100vh;
+
+  &__card {
+    margin-bottom: 3rem;
+  }
+}
+
+// CARD
+
+.card {
+  background: var(--neutral-2);
+  max-width: $size;
+  width: 90%;
+  min-height: 350px;
+  padding: 3rem 3rem 4rem; // 48px 64px
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem; // 24px
+  position: relative;
+  transition: 0.3s;
+
+  @media screen and (max-width: $size) {
+    padding: 2rem 1rem 4rem;
+  }
+
+  &__advice {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__id {
+    display: inline-block;
+  }
+
+  &__id--out {
+    animation: shrink-out 0.8s forwards;
+  }
+
+  &__id--in {
+    animation: shrink-in 0.8s forwards;
+  }
+
+  &__advice--out {
+    animation: fade-out 0.8s forwards;
+  }
+
+  &__advice--in {
+    animation: fade-in 0.8s forwards;
+  }
+
+  &__icon-divider {
+    background: url(../src/assets/pattern-divider-desktop.svg) no-repeat;
+    width: 100%;
+    height: 1rem;
+    background-size: cover;
+    background-position: center;
+  }
+
+  &__button {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: scale(1) translateX(-50%) translateY(50%);
+    border: none;
+    padding: 20px;
+    border-radius: 50%;
+    background: var(--primary-2);
+    transition: 0.3s;
+    box-shadow: 0 0 0px 0px var(--primary-2);
+
+    &[disabled] {
+      background: var(--primary-1);
+      cursor: wait;
+    }
+
+    &:hover:not([disabled]) {
+      cursor: pointer;
+      box-shadow: 0 0 88px 12px var(--primary-2);
+      transform: translateX(-50%) translateY(50%);
+    }
+  }
+
+  &__icon-dice {
+    display: inline-block;
+    width: 1.5rem; // 24px
+    height: 1.5rem; // 24px
+    background: url(../src/assets/icon-dice.svg) no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__button[disabled] &__icon-dice {
+    animation: rotate-360 2s infinite alternate ease-in-out;
+  }
+
+  &__button[disabled] {
+    animation: shade-fade 2s forwards infinite alternate ease-in-out;
+  }
+}
+
+// TEXT
+
+.text {
+  font-family: var(--font);
+  color: var(--primary-1);
+  font-size: 28px;
+  font-weight: 600;
+  text-align: center;
+  transition: font-size 0.3s;
+
+  @media screen and (max-width: $size) {
+    font-size: 24px;
+  }
+
+  &--quote span::before {
+    content: "“";
+  }
+
+  &--quote span::after {
+    content: "”";
+  }
+
+  &--h2 {
+    color: var(--primary-2);
+    text-transform: uppercase;
+    letter-spacing: 0.25rem; // 4px
+    font-size: 13px;
+
+    @media screen and (max-width: $size) {
+      font-size: 12px;
+    }
+  }
+
+  &--color {
+    &--secondary {
+      color: var(--primary-1);
+    }
+
+    &--error {
+      color: var(--primary-3);
+    }
+  }
+
+  &--color_secondary {
+    color: var(--primary-1);
+  }
+
+  &--link {
+    color: var(--primary-2);
+    text-decoration: none;
+    position: relative;
+  }
+
+  // https://tobiasahlin.com/blog/css-trick-animating-link-underlines/
+  &--link::before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--primary-2);
+    transform: scaleX(0);
+    transition: transform 0.5s ease;
+  }
+
+  &--link:hover::before {
+    transform: scaleX(1);
+  }
+
+  &--description {
+    font-size: 14px;
+  }
+}
+
+// FOOTER
+
+.footer {
+  background: var(--neutral-2);
+  max-width: $size;
+  width: 90%;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+// ERROR
+
+.error {
+  background: var(--neutral-2);
+  max-width: $size;
+  width: 90%;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  opacity: 0;
+  animation: shrink-in 0.8s forwards;
+}
+
+// KEYFRAMES
+
+@keyframes rotate-360 {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes shade-fade {
+  0% {
+    box-shadow: 0 0 88px 12px var(--primary-1);
+  }
+
+  100% {
+    box-shadow: 0 0 0px 0px var(--primary-1);
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes shrink-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes shrink-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
