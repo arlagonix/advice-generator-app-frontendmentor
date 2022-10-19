@@ -1,6 +1,6 @@
 <h1 align="center">Advice Generator App</h1>
 <p align="center">
- Coded with HTML, SCSS, JavaScript
+  Coded with <code>HTML</code>, <code>SCSS</code>, <code>JavaScript</code>
 </p>
 
 <p align="center">
